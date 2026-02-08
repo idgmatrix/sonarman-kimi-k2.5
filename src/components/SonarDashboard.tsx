@@ -98,9 +98,15 @@ export const SonarDashboard: React.FC = () => {
 
           {/* Display content */}
           <div className="flex-1 relative sonar-grid scanlines p-4">
-            {activeDisplay === 'LOFAR' && <WaterfallDisplay />}
-            {activeDisplay === 'DEMON' && <DemonScope />}
-            {activeDisplay === 'TMA' && <TMAPlotter />}
+            <div className={`absolute inset-0 transition-opacity duration-300 ${activeDisplay === 'LOFAR' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <WaterfallDisplay />
+            </div>
+            <div className={`absolute inset-0 transition-opacity duration-300 ${activeDisplay === 'DEMON' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <DemonScope />
+            </div>
+            <div className={`absolute inset-0 transition-opacity duration-300 ${activeDisplay === 'TMA' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <TMAPlotter />
+            </div>
           </div>
 
           {/* Bottom info panel */}
