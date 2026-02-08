@@ -104,7 +104,7 @@ export const SonarDashboard: React.FC = () => {
           </div>
 
           {/* Bottom info panel */}
-          <div className="h-56 border-t border-sonar-grid flex gap-4">
+          <div className="h-72 border-t border-sonar-grid flex gap-4">
             <div className="w-1/3 border-r border-sonar-grid p-4 flex flex-col">
               <BearingIndicator />
             </div>
