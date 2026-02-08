@@ -106,9 +106,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ audioEngine }) => {
           <ul className="space-y-1 list-disc list-inside">
             <li>Click targets to select</li>
             <li>Use LOFAR for frequency analysis</li>
-            <li>Use D
-
-EMON for blade rate</li>
+            <li>Use DEMON for blade rate</li>
             <li>Use TMA for tracking</li>
           </ul>
         </div>

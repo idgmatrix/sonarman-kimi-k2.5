@@ -46,9 +46,7 @@ export const TMAPlotter: React.FC = () => {
     targets.forEach(target => {
       const history = bearingHistory.get(target.id) || [];
       history.forEach(reading => {
-        const bucketTime = Math.floor(reading
-
-.timestamp / bucketSize) * bucketSize;
+        const bucketTime = Math.floor(reading.timestamp / bucketSize) * bucketSize;
         const bucket = buckets.get(bucketTime);
         if (bucket) {
           bucket[target.id] = reading.bearing;
@@ -77,9 +75,7 @@ export const TMAPlotter: React.FC = () => {
             <YAxis 
               domain={[0, 360]} 
               stroke="#6b7280"
-              tickFormatter={(value) =>
-
- `${value}°`}
+              tickFormatter={(value) => `${value}°`}
               label={{ value: 'Bearing', angle: -90, position: 'insideLeft', fill: '#6b7280' }}
             />
             <Tooltip 
@@ -103,9 +99,7 @@ export const TMAPlotter: React.FC = () => {
                 type="monotone"
                 dataKey={target.id}
                 stroke={colors[index % colors.length]}
-                strokeWidth={target.id === selectedTargetId
-
- ? 3 : 2}
+                strokeWidth={target.id === selectedTargetId ? 3 : 2}
                 dot={false}
                 connectNulls
                 name={`Target ${index + 1}`}

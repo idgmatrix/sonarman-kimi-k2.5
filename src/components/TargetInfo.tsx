@@ -14,9 +14,7 @@ export const TargetInfo: React.FC = () => {
     switch (status) {
       case ClassificationStatus.IDENTIFIED: return 'text-sonar-accent';
       case ClassificationStatus.ANALYZING: return 'text-yellow-400';
-     
-
- case ClassificationStatus.DETECTED: return 'text-sonar-warning';
+      case ClassificationStatus.DETECTED: return 'text-sonar-warning';
       default: return 'text-sonar-muted';
     }
   };
@@ -41,9 +39,7 @@ export const TargetInfo: React.FC = () => {
               </span>
             </div>
             
-            <div className="
-
-grid grid-cols-2 gap-2 text-xs">
+            <div className="grid grid-cols-2 gap-2 text-xs">
               <div>
                 <div className="text-sonar-muted">Range</div>
                 <div className="font-mono text-sonar-text">
@@ -87,9 +83,7 @@ grid grid-cols-2 gap-2 text-xs">
               </div>
               <div className="flex justify-between">
                 <span className="text-sonar-muted">Shaft RPM</span>
-                <span className="font-mono text-son
-
-ar-text">{selectedTarget.signature.shaftRPM} RPM</span>
+                <span className="font-mono text-sonar-text">{selectedTarget.signature.shaftRPM} RPM</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-sonar-muted">Blade Count</span>
@@ -103,16 +97,12 @@ ar-text">{selectedTarget.signature.shaftRPM} RPM</span>
             <div className="flex gap-2">
               <button
                 onClick={() => classifyTarget(selectedTarget.id, ClassificationStatus.ANALYZING)}
-                className="flex-1 py-1 px-2 bg-yellow-900/30 border border-yellow-600 text-yellow-400 text-xs rounded hover:bg-yellow-900/50 transition-colors"
-              >
+                className="flex-1 py-1 px-2 bg-yellow-900/30 border border-yellow-600 text-yellow-400 text-xs rounded hover:bg-yellow-900/50 transition-colors">
                 ANALYZING
               </button>
               <button
                 onClick={() => classifyTarget(selectedTarget.id, ClassificationStatus.IDENTIFIED)}
-                className="
-
-flex-1 py-1 px-2 bg-green-900/30 border border-green-600 text-green-400 text-xs rounded hover:bg-green-900/50 transition-colors"
-              >
+                className="flex-1 py-1 px-2 bg-green-900/30 border border-green-600 text-green-400 text-xs rounded hover:bg-green-900/50 transition-colors">
                 IDENTIFY
               </button>
             </div>
@@ -134,8 +124,6 @@ flex-1 py-1 px-2 bg-green-900/30 border border-green-600 text-green-400 text-xs 
             <button
               key={target.id}
               onClick={() => target.detected && selectedTargetId !== target.id ? classifyTarget(target.id, ClassificationStatus.ANALYZING) : null}
-
-
               className={`w-full text-left py-1 px-2 rounded text-xs flex justify-between items-center ${
                 selectedTargetId === target.id 
                   ? 'bg-sonar-grid text-sonar-accent' 

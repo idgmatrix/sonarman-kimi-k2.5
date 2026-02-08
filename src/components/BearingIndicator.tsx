@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import { useSonarStore } from '@/store/sonarStore';
 
 export const BearingIndicator: React.FC = () => {
@@ -22,9 +20,7 @@ export const BearingIndicator: React.FC = () => {
       <div className="flex-1 relative bg-sonar-bg rounded border border-sonar-grid overflow-hidden">
         {/* Compass rose background */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <svg viewBox="0 0 
-
-200 200" className="w-full h-full opacity-30">
+          <svg viewBox="0 0 200 200" className="w-full h-full opacity-30">
             <circle cx="100" cy="100" r="90" fill="none" stroke="#374151" strokeWidth="1" />
             <circle cx="100" cy="100" r="70" fill="none" stroke="#374151" strokeWidth="1" strokeDasharray="4 4" />
             
@@ -41,9 +37,7 @@ export const BearingIndicator: React.FC = () => {
           const bearing = calculateBearing(target);
           const angle = bearing - 90; // Adjust for SVG coordinate system
           const radius = 80;
-          const x = 100 + radius * Math.cos(angle * Math.PI / 
-
-180);
+          const x = 100 + radius * Math.cos(angle * Math.PI / 180);
           const y = 100 + radius * Math.sin(angle * Math.PI / 180);
           
           const isSelected = selectedTargetId === target.id;
@@ -93,12 +87,9 @@ export const BearingIndicator: React.FC = () => {
           return (
             <div 
               key={target.id}
-              className="flex justify-between items-center text-xs py-1 px-2 bg-sonar-panel rounded"
-            >
+              className="flex justify-between items-center text-xs py-1 px-2 bg-sonar-panel rounded">
               <span style={{ color }}>● Target {index + 1}</span>
               <span className="font-mono text-sonar-text">{bearing.toFixed(1)}°</span>
-
-
             </div>
           );
         })}

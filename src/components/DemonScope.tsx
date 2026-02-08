@@ -13,9 +13,7 @@ export const DemonScope: React.FC = () => {
   const listenerPosition = useSonarStore(state => state.listenerPosition);
   const setDEMONData = useSonarStore(state => state.setDEMONData);
 
-  const
-
- selectedTarget = targets.find(t => t.id === selectedTargetId);
+  const selectedTarget = targets.find(t => t.id === selectedTargetId);
 
   const generateEnvelope = useCallback((): number[] => {
     if (!selectedTarget || !selectedTarget.detected) {
@@ -37,9 +35,7 @@ export const DemonScope: React.FC = () => {
       // Modulated signal: blade rate + harmonics
       let signal = Math.sin(2 * Math.PI * bladeRate * t);
       signal += 0.3 * Math.sin(2 * Math.PI * bladeRate * 2 * t);
-      signal += 0.
-
-1 * Math.sin(2 * Math.PI * bladeRate * 3 * t);
+      signal += 0.1 * Math.sin(2 * Math.PI * bladeRate * 3 * t);
       
       // Add noise
       signal += (Math.random() - 0.5) * 0.2;
@@ -80,9 +76,7 @@ export const DemonScope: React.FC = () => {
       ctx.beginPath();
       for (let i = 0; i < canvas.width; i += 50) {
         ctx.moveTo(i, 0);
-        ctx.lineTo(i, canvas.height
-
-);
+        ctx.lineTo(i, canvas.height);
       }
       for (let i = 0; i < canvas.height; i += 30) {
         ctx.moveTo(0, i);
@@ -156,11 +150,9 @@ export const DemonScope: React.FC = () => {
           </div>
         </div>
         <div>
-          <div className="text-xs text-sonar-muted mb-1">BLADE COUNT</div
-
->
+          <div className="text-xs text-sonar-muted mb-1">BLADE COUNT</div>
           <div className="text-xl font-mono text-sonar-accent">
-            {selectedTarget?.signature.bladeCount || '--'}
+            {selectedTarget ?.signature.bladeCount || '--'}
           </div>
         </div>
         <div>

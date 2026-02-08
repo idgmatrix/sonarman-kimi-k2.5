@@ -1,6 +1,4 @@
-import React
-
-, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSonarStore } from '@/store/sonarStore';
 import { WaterfallDisplay } from './WaterfallDisplay';
 import { DemonScope } from './DemonScope';
@@ -50,9 +48,7 @@ export const SonarDashboard: React.FC = () => {
   }, [isAudioInitialized, targets, listenerPosition, listenerRotation, masterGain]);
 
   return (
-    <div className="w-screen h-screen bg-sonar-bg flex flex
-
--col overflow-hidden">
+    <div className="w-screen h-screen bg-sonar-bg flex flex-col overflow-hidden">
       {/* Header */}
       <header className="h-14 bg-sonar-panel border-b border-sonar-grid flex items-center justify-between px-4">
         <div className="flex items-center gap-4">
@@ -75,9 +71,7 @@ export const SonarDashboard: React.FC = () => {
       <div className="flex-1 flex">
         {/* Left panel - 3D View */}
         <div className="w-1/2 border-r border-sonar-grid relative">
-          <UnderwaterScene
-
- />
+          <UnderwaterScene />
           <div className="absolute top-4 left-4 bg-sonar-panel/80 backdrop-blur px-3 py-2 rounded border border-sonar-grid">
             <span className="text-xs text-sonar-muted">TACTICAL VIEW</span>
           </div>
@@ -102,9 +96,7 @@ export const SonarDashboard: React.FC = () => {
             ))}
           </div>
 
-          {/*
-
- Display content */}
+          {/* Display content */}
           <div className="flex-1 relative sonar-grid scanlines">
             {activeDisplay === 'LOFAR' && <WaterfallDisplay />}
             {activeDisplay === 'DEMON' && <DemonScope />}

@@ -95,9 +95,7 @@ export const WaterfallDisplay: React.FC = () => {
             b = 255;
           } else if (intensity < 0.75) {
             r = Math.floor((intensity - 0.5) * 4 * 255);
-            g
-
- = 255;
+            g = 255;
           } else {
             r = 255;
             g = Math.floor((1 - (intensity - 0.75) * 4) * 255);
@@ -137,9 +135,7 @@ export const WaterfallDisplay: React.FC = () => {
         height={400}
         className="w-full h-full"
       />
-      <div className="absolute top-2 left-2 text
-
--xs text-sonar-muted bg-sonar-panel/80 px-2 py-1 rounded">
+      <div className="absolute top-2 left-2 text-xs text-sonar-muted bg-sonar-panel/80 px-2 py-1 rounded">
         LOFAR - Low Frequency Analysis
       </div>
       <div className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-1 text-xs text-sonar-muted">
