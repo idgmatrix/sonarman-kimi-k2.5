@@ -22,9 +22,7 @@ export const TargetMesh: React.FC<TargetMeshProps> = ({ target }) => {
         return '#00ff88';
       case ClassificationStatus.ANALYZING:
         return '#ffaa00';
-      case ClassificationStatus
-
-.DETECTED:
+      case ClassificationStatus.DETECTED:
         return '#ff6b35';
       default:
         return '#3a4a5a';

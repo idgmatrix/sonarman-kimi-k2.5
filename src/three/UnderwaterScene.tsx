@@ -41,7 +41,7 @@ const SceneContent: React.FC = () => {
       
       {/* Directional light (sun from above) */}
       <directionalLight 
-      position={[0, 500, 0]} 
+      position={[0, 500, 0]}
         intensity={0.5} 
         color="#4a8aaa"
       />
@@ -105,8 +105,6 @@ export const UnderwaterScene: React.FC = () => {
       <Canvas
         camera={{ position: [0, 20, 50], fov: 60 }}
         gl={{ antialias: true, alpha: true }}
-
-
         style={{ background: '#0a1a2a' }}
       >
         <SceneContent />
