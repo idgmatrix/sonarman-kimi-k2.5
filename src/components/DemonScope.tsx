@@ -127,16 +127,16 @@ export const DemonScope: React.FC = () => {
   const demonData = useSonarStore(state => state.demonData);
 
   return (
-    <div className="w-full h-full relative flex flex-col">
+    <div className="w-full h-full reletive">
       <canvas
         ref={canvasRef}
         width={800}
-        height={300}
-        className="flex-1"
+        height={245}
+        className="w-full h-full"
       />
 
       {/* Info panel */}
-      <div className="h-24 bg-sonar-panel/90 backdrop-blur border-t border-sonar-grid p-3 flex gap-8">
+      <div className="absolute bottom-0 bg-sonar-panel/90 backdrop-blur border-t border-sonar-grid p-3 flex gap-8">
         <div>
           <div className="text-xs text-sonar-muted mb-1">BLADE RATE</div>
           <div className="text-xl font-mono text-sonar-accent">

@@ -4,8 +4,6 @@ import { useSonarStore } from '@/store/sonarStore';
 const FFT_SIZE = 512;
 const HISTORY_SIZE = 200;
 
-
-
 export const WaterfallDisplay: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const historyRef = useRef<number[][]>([]);

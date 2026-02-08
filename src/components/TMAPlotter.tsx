@@ -18,7 +18,7 @@ export const TMAPlotter: React.FC = () => {
 
   // Prepare data for chart
   const prepareData = () => {
-    const data: any[] = [];
+    //const data: any[] = [];
 
     // Find time range
     let minTime = Infinity;

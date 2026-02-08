@@ -108,7 +108,7 @@ export const SonarDashboard: React.FC = () => {
           </div>
 
           {/* Display content */}
-          <div className="h-72 relative sonar-grid scanlines p-4">
+          <div className="h-80 relative sonar-grid scanlines p-4">
             <div className={`absolute inset-0 transition-opacity duration-300 ${activeDisplay === 'LOFAR' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
               <WaterfallDisplay />
             </div>
@@ -121,7 +121,7 @@ export const SonarDashboard: React.FC = () => {
           </div>
 
           {/* Bottom info panel */}
-          <div className="h-72 border-t border-sonar-grid flex gap-4">
+          <div className="h-80 border-t border-sonar-grid flex gap-4">
             <div className="w-1/3 border-r border-sonar-grid p-4 flex flex-col">
               <BearingIndicator />
             </div>

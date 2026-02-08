@@ -30,7 +30,7 @@ export const TargetInfo: React.FC = () => {
       <h3 className="text-xs text-sonar-muted mb-2 uppercase tracking-wider">Target Information</h3>
 
       {selectedTarget ? (
-        <div className="flex-1 space-y-3 overflow-auto">
+        <div className="flex-1 space-y-3">
           <div className="bg-sonar-panel/90 backdrop-blur rounded p-3 border border-sonar-grid">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sonar-accent font-bold">Target {targets.indexOf(selectedTarget) + 1}</span>
