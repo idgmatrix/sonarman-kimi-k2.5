@@ -98,5 +98,7 @@ Centralized types in `src/types/index.ts`:
 - **Singleton audio**: Single `AudioEngine` instance managed in dashboard; do not create new instances
 - **Path alias**: Use `@/` for imports to `src/` directory (configured in `tsconfig.json` and `vite.config.ts`)
 - **Time compression**: Affects physics in game loop but not audio pitch
-- **Deployment**: Uses base path `/sonarman-kimi-k2.5/` in Vite config for GitHub Pages
+- **Deployment**: Uses base path `/sonarman-kimi-k2.5/` in Vite config for GitHub Pages; repository is hosted at https://idgmatrix.github.io/sonarman-kimi-k2.5/
 - **Strict mode**: TypeScript enforces strict type checking
+- **Styling**: Custom Tailwind config defines a `sonar` theme with dark ocean colors and accent green (#00ff88)
+- **No source tests**: Test files don't exist in the source code (tests are only in node_modules dependencies)
