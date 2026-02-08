@@ -66,27 +66,27 @@ export const TMAPlotter: React.FC = () => {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-            <XAxis 
-              dataKey="time" 
+            <XAxis
+              dataKey="time"
               stroke="#6b7280"
               tickFormatter={(value) => `${value}s`}
               label={{ value: 'Time (seconds)', position: 'insideBottom', offset: -10, fill: '#6b7280' }}
             />
-            <YAxis 
-              domain={[0, 360]} 
+            <YAxis
+              domain={[0, 360]}
               stroke="#6b7280"
               tickFormatter={(value) => `${value}°`}
               label={{ value: 'Bearing', angle: -90, position: 'insideLeft', fill: '#6b7280' }}
             />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#111827', 
+            <Tooltip
+              contentStyle={{
+                backgroundColor: '#111827',
                 border: '1px solid #374151',
                 borderRadius: '4px'
               }}
               labelStyle={{ color: '#6b7280' }}
             />
-            
+
             {/* Cardinal directions */}
             <ReferenceLine y={0} stroke="#374151" strokeDasharray="3 3" />
             <ReferenceLine y={90} stroke="#374151" strokeDasharray="3 3" />
@@ -112,11 +112,11 @@ export const TMAPlotter: React.FC = () => {
       {/* Legend */}
       <div className="h-12 flex items-center gap-6 mt-4 border-t border-sonar-grid pt-2">
         {targets.map((target, index) => (
-          <div 
-            key={target.id} 
+          <div
+            key={target.id}
             className={`flex items-center gap-2 ${target.id === selectedTargetId ? 'opacity-100' : 'opacity-60'}`}
           >
-            <div 
+            <div
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: colors[index % colors.length] }}
             />

@@ -28,17 +28,17 @@ export const TargetInfo: React.FC = () => {
   return (
     <div className="h-full flex flex-col">
       <h3 className="text-xs text-sonar-muted mb-2 uppercase tracking-wider">Target Information</h3>
-      
+
       {selectedTarget ? (
         <div className="flex-1 space-y-3 overflow-auto">
-          <div className="bg-sonar-panel rounded p-3 border border-sonar-grid">
+          <div className="bg-sonar-panel/90 backdrop-blur rounded p-3 border border-sonar-grid">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sonar-accent font-bold">Target {targets.indexOf(selectedTarget) + 1}</span>
               <span className={`text-xs ${getStatusColor(selectedTarget.classification)}`}>
                 {selectedTarget.classification}
               </span>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div>
                 <div className="text-sonar-muted">Range</div>
@@ -74,7 +74,7 @@ export const TargetInfo: React.FC = () => {
           </div>
 
           {/* Acoustic Signature */}
-          <div className="bg-sonar-panel rounded p-3 border border-sonar-grid">
+          <div className="bg-sonar-panel/90 backdrop-blur rounded p-3 border border-sonar-grid">
             <div className="text-xs text-sonar-muted mb-2">ACOUSTIC SIGNATURE</div>
             <div className="space-y-1 text-xs">
               <div className="flex justify-between">
@@ -125,8 +125,8 @@ export const TargetInfo: React.FC = () => {
               key={target.id}
               onClick={() => target.detected && selectedTargetId !== target.id ? classifyTarget(target.id, ClassificationStatus.ANALYZING) : null}
               className={`w-full text-left py-1 px-2 rounded text-xs flex justify-between items-center ${
-                selectedTargetId === target.id 
-                  ? 'bg-sonar-grid text-sonar-accent' 
+                selectedTargetId === target.id
+                  ? 'bg-sonar-grid text-sonar-accent'
                   : 'bg-sonar-bg text-sonar-muted hover:bg-sonar-panel'
               } ${!target.detected ? 'opacity-50' : ''}`}
             >

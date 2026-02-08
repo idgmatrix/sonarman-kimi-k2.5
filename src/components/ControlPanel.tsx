@@ -19,7 +19,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ audioEngine }) => {
   return (
     <div className="h-full flex flex-col">
       <h3 className="text-xs text-sonar-muted mb-2 uppercase tracking-wider">Controls</h3>
-      
+
       <div className="flex-1 space-y-4">
         {/* Volume control */}
         <div>
@@ -66,7 +66,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ audioEngine }) => {
         </div>
 
         {/* Audio status */}
-        <div className="bg-sonar-panel rounded p-2 border border-sonar-grid">
+        <div className="bg-sonar-panel/90 backdrop-blur rounded p-2 border border-sonar-grid">
           <div className="text-xs text-sonar-muted mb-1">AUDIO STATUS</div>
           <div className={`text-xs font-mono ${isAudioInitialized ? 'text-sonar-accent' : 'text-sonar-warning'}`}>
             {isAudioInitialized ? '● ACTIVE' : '○ INACTIVE - Click to start'}
@@ -85,7 +85,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ audioEngine }) => {
           >
             {isAudioInitialized ? 'Audio Running' : 'Initialize Audio'}
           </button>
-          
+
           <button
             onClick={() => {
               // Reset all classifications

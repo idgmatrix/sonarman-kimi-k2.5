@@ -97,21 +97,21 @@ export const SonarDashboard: React.FC = () => {
           </div>
 
           {/* Display content */}
-          <div className="flex-1 relative sonar-grid scanlines">
+          <div className="flex-1 relative sonar-grid scanlines p-4">
             {activeDisplay === 'LOFAR' && <WaterfallDisplay />}
             {activeDisplay === 'DEMON' && <DemonScope />}
             {activeDisplay === 'TMA' && <TMAPlotter />}
           </div>
 
           {/* Bottom info panel */}
-          <div className="h-48 border-t border-sonar-grid flex">
-            <div className="w-1/3 border-r border-sonar-grid p-4">
+          <div className="h-56 border-t border-sonar-grid flex gap-4">
+            <div className="w-1/3 border-r border-sonar-grid p-4 flex flex-col">
               <BearingIndicator />
             </div>
-            <div className="w-1/3 border-r border-sonar-grid p-4">
+            <div className="w-1/3 border-r border-sonar-grid p-4 flex flex-col">
               <TargetInfo />
             </div>
-            <div className="w-1/3 p-4">
+            <div className="w-1/3 p-4 flex flex-col">
               <ControlPanel audioEngine={audioEngine} />
             </div>
           </div>

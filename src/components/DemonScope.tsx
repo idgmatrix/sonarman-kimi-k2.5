@@ -134,9 +134,9 @@ export const DemonScope: React.FC = () => {
         height={300}
         className="flex-1"
       />
-      
+
       {/* Info panel */}
-      <div className="h-24 bg-sonar-panel border-t border-sonar-grid p-3 flex gap-8">
+      <div className="h-24 bg-sonar-panel/90 backdrop-blur border-t border-sonar-grid p-3 flex gap-8">
         <div>
           <div className="text-xs text-sonar-muted mb-1">BLADE RATE</div>
           <div className="text-xl font-mono text-sonar-accent">
@@ -162,8 +162,8 @@ export const DemonScope: React.FC = () => {
           </div>
         </div>
       </div>
-      
-      <div className="absolute top-2 left-2 text-xs text-sonar-muted bg-sonar-panel/80 px-2 py-1 rounded">
+
+      <div className="absolute top-2 left-2 text-xs text-sonar-muted bg-sonar-panel/80 backdrop-blur px-2 py-1 rounded border border-sonar-grid">
         DEMON - Demodulated Noise
       </div>
     </div>
