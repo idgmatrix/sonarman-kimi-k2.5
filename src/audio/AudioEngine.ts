@@ -165,7 +165,7 @@ export class AudioEngine {
   }
 
   dispose(): void {
-    this.targetSources.forEach((panner, id) => {
+    this.targetSources.forEach((_panner, id) => {
       this.removeTarget(id);
     });
     this.masterGain.dispose();

@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, {  } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Grid, Fog } from '@react-three/drei';
-import * as THREE from 'three';
+import { Grid } from '@react-three/drei';
+//import * as THREE from 'three';
 import { useSonarStore } from '@/store/sonarStore';
 import { TargetMesh } from './TargetMesh';
 
@@ -12,7 +12,7 @@ const SceneContent: React.FC = () => {
   const targets = useSonarStore(state => state.targets);
   const update = useSonarStore(state => state.update);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     // Update game logic
     update(delta);
     
@@ -86,13 +86,13 @@ const SceneContent: React.FC = () => {
           opacity={0.8}
         />
         <arrowHelper
-          dir={new THREE.Vector3(
-            Math.sin(listenerRotation * Math.PI / 180),
-            0,
-            Math.cos(listenerRotation * Math.PI / 180)
-          )}
-          length={20}
-          color="#00ff88"
+          //dir={new THREE.Vector3(
+          //  Math.sin(listenerRotation * Math.PI / 180),
+          //  0,
+          //  Math.cos(listenerRotation * Math.PI / 180)
+          //)}
+          //length={20}
+          //color="#00ff88"
         />
       </mesh>
     </>

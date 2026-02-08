@@ -28,7 +28,6 @@ export const DemonScope: React.FC = () => {
     const snr = Math.max(0, 40 - distance * 0.05);
 
     const bladeRate = selectedTarget.signature.shaftRPM / 60 * selectedTarget.signature.bladeCount;
-    const samplesPerPeriod = 44100 / 60 / bladeRate; // Assuming 60fps display
     
     const envelope: number[] = [];
     const now = Date.now() / 1000;

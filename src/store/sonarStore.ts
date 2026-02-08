@@ -61,7 +61,7 @@ const createDefaultTarget = (id: string, x: number, z: number): Target => ({
   classification: ClassificationStatus.UNDETECTED
 });
 
-export const useSonarStore = create<SonarState & SonarActions>((set, get) => ({
+export const useSonarStore = create<SonarState & SonarActions>((set, _get) => ({
   // Initial state
   targets: [
     createDefaultTarget('target-1', 500, 0),

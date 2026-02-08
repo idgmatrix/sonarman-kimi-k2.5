@@ -2,11 +2,9 @@ import * as Tone from 'tone';
 
 export class LOFARProcessor {
   private analyser: Tone.Analyser;
-  private fftSize: number;
   private sampleRate: number;
 
   constructor(fftSize: number = 2048) {
-    this.fftSize = fftSize;
     this.sampleRate = Tone.context.sampleRate;
     
     this.analyser = new Tone.Analyser({

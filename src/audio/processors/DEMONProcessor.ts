@@ -17,8 +17,7 @@ export class DEMONProcessor {
 
     // Envelope follower to extract modulation
     this.envelopeFollower = new Tone.Follower({
-      attack: 0.01,
-      release: 0.1
+      smoothing: 0.01
     });
 
     // Lowpass to isolate blade rate (typically 0.5-20 Hz)
