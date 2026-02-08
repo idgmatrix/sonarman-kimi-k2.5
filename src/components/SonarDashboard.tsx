@@ -75,6 +75,17 @@ export const SonarDashboard: React.FC = () => {
           <div className="absolute top-4 left-4 bg-sonar-panel/80 backdrop-blur px-3 py-2 rounded border border-sonar-grid">
             <span className="text-xs text-sonar-muted">TACTICAL VIEW</span>
           </div>
+          <div className="absolute bottom-4 right-4 bg-sonar-panel/80 backdrop-blur px-3 py-2 rounded border border-sonar-grid">
+            <div className="text-xs text-sonar-muted">
+              <div className="font-semibold mb-1 text-sonar-text">Quick Guide:</div>
+              <ul className="space-y-1 list-disc list-inside">
+                <li>Click targets to select</li>
+                <li>Use LOFAR for frequency analysis</li>
+                <li>Use DEMON for blade rate</li>
+                <li>Use TMA for tracking</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         {/* Right panel - Analysis displays */}
@@ -97,7 +108,7 @@ export const SonarDashboard: React.FC = () => {
           </div>
 
           {/* Display content */}
-          <div className="h-64 relative sonar-grid scanlines p-4">
+          <div className="h-72 relative sonar-grid scanlines p-4">
             <div className={`absolute inset-0 transition-opacity duration-300 ${activeDisplay === 'LOFAR' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
               <WaterfallDisplay />
             </div>
@@ -110,7 +121,7 @@ export const SonarDashboard: React.FC = () => {
           </div>
 
           {/* Bottom info panel */}
-          <div className="h-80 border-t border-sonar-grid flex gap-4">
+          <div className="h-72 border-t border-sonar-grid flex gap-4">
             <div className="w-1/3 border-r border-sonar-grid p-4 flex flex-col">
               <BearingIndicator />
             </div>

@@ -99,17 +99,6 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ audioEngine }) => {
             Reset Classifications
           </button>
         </div>
-
-        {/* Help text */}
-        <div className="text-xs text-sonar-muted mt-4 p-2 bg-sonar-bg rounded border border-sonar-grid/50">
-          <div className="font-semibold mb-1 text-sonar-text">Quick Guide:</div>
-          <ul className="space-y-1 list-disc list-inside">
-            <li>Click targets to select</li>
-            <li>Use LOFAR for frequency analysis</li>
-            <li>Use DEMON for blade rate</li>
-            <li>Use TMA for tracking</li>
-          </ul>
-        </div>
       </div>
     </div>
   );
