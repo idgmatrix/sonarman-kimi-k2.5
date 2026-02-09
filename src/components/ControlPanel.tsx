@@ -53,10 +53,10 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ audioEngine }) => {
               <button
                 key={rate}
                 onClick={() => setTimeCompression(rate)}
-                className={`flex-1 py-1 text-xs rounded border transition-colors ${
+                className={`flex-1 py-1 text-xs rounded border transition-all ${
                   timeCompression === rate
-                    ? 'bg-sonar-accent text-sonar-bg border-sonar-accent'
-                    : 'bg-sonar-panel text-sonar-text border-sonar-grid hover:border-sonar-accent'
+                    ? 'bg-sonar-accent text-sonar-bg border-sonar-accent shadow-[0_0_10px_rgba(0,255,136,0.3)]'
+                    : 'bg-sonar-panel text-sonar-text border-sonar-grid hover:border-sonar-accent/50'
                 }`}
               >
                 {rate}x

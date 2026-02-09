@@ -48,15 +48,16 @@ export const BearingIndicator: React.FC = () => {
             <button
               key={target.id}
               onClick={() => selectTarget(target.id)}
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all"
+              className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-200 hover:scale-110"
               style={{ left: `${x}%`, top: `${y}%` }}
             >
               <div
-                className={`w-4 h-4 rounded-full border-2 ${isSelected ? 'scale-125' : ''}`}
+                className={`w-4 h-4 rounded-full border-2 ${isSelected ? 'scale-125 animate-target-pulse' : ''}`}
                 style={{
                   backgroundColor: color,
                   borderColor: isSelected ? '#fff' : color,
-                  boxShadow: isSelected ? `0 0 10px ${color}` : 'none'
+                  boxShadow: isSelected ? `0 0 10px ${color}` : 'none',
+                  color: color
                 }}
               />
               <div

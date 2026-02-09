@@ -127,7 +127,7 @@ export const DemonScope: React.FC = () => {
   const demonData = useSonarStore(state => state.demonData);
 
   return (
-    <div className="w-full h-full reletive">
+    <div className="w-full h-full relative">
       <canvas
         ref={canvasRef}
         width={800}

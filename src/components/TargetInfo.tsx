@@ -110,8 +110,10 @@ export const TargetInfo: React.FC = () => {
         </div>
       ) : (
         <div className="flex-1 flex flex-col items-center justify-center text-sonar-muted">
-          <div className="text-4xl mb-2">🎯</div>
-          <div className="text-sm">Select a target</div>
+          <div className="w-16 h-16 rounded-full border-2 border-dashed border-sonar-grid flex items-center justify-center mb-3">
+            <span className="text-2xl text-sonar-grid">?</span>
+          </div>
+          <div className="text-sm">No target selected</div>
           <div className="text-xs mt-2">Click on a contact in the tactical view</div>
         </div>
       )}

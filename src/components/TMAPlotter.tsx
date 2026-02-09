@@ -57,16 +57,7 @@ export const TMAPlotter: React.FC = () => {
     return Array.from(buckets.values());
   };
 
-  // Debug: Log data preparation
-  console.log('TMAPlotter - Targets:', targets.length);
-  console.log('TMAPlotter - Bearing history size:', bearingHistory.size);
-  targets.forEach(target => {
-    const history = bearingHistory.get(target.id);
-    console.log(`TMAPlotter - Target ${target.id} history:`, history?.length || 0);
-  });
-
   const data = prepareData();
-  console.log('TMAPlotter - Data:', data.length);
   const colors = ['#00ff88', '#ff6b35', '#ffaa00', '#00aaff'];
 
   return (

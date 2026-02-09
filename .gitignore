@@ -48,3 +48,7 @@ coverage
 # Temporary files
 *.tmp
 *.temp
+
+# Tool-specific directories
+.claude/
+.serena/
