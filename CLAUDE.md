@@ -37,6 +37,9 @@ npm run deploy
   - UI state (active display, time compression)
 - Game loop runs in `update()` method, updating target positions and calculating detections
 - `update()` handles physics: velocity-based movement, bearing calculations, SNR-based detection
+  - Detection logic: SNR = cavitationLevel * 1000 / (distance * 0.1 + 1)
+  - Target detected when SNR > 5 threshold
+  - Bearing readings added with 30% probability when detected (with noise)
 
 **Audio Engine** (`src/audio/AudioEngine.ts`)
 - Tone.js-based spatial audio system
@@ -47,20 +50,31 @@ npm run deploy
 - Must be accessed via singleton instance created in `SonarDashboard.tsx`
 - Calls to `setListenerPosition()` update Tone.js listener
 - Uses noise sources and filters to simulate cavitation underwater propagation
+- Audio signal chain per target: Noise -> Filter -> Gain -> Panner3D -> MasterGain -> Destination
+- Doppler effect calculated based on relative velocity to listener
+- Depth affects lowpass filter frequency (deeper = more attenuation)
 
 **3D Scene** (`src/three/UnderwaterScene.tsx`)
 - React Three Fiber canvas with camera following listener
+- Game loop runs via `useFrame` hook calling `store.update(delta)` every frame
+- Coordinate system: Y is up/down (negative Y = deeper), X/Z are horizontal plane
 - Fog for underwater depth effect
 - Grid overlay with 100-unit cells
 - Ocean floor at y=-200
 - Targets rendered as 3D meshes
-- Listener indicator (cone) shows current position
+- Listener indicator (cone) shows current position and rotation
 
 ### Signal Processing
 
 **Processors** (`src/audio/processors/`)
 - `LOFARProcessor.ts`: Low Frequency Analysis and Recording processing
+  - Uses Tone.Analyser with FFT size 2048
+  - Returns frequencies up to 1kHz for sonar display
+  - Connects to audio sources to get real-time spectral data
 - `DEMONProcessor.ts`: Demodulation analysis for blade rate extraction
+  - Uses envelope follower to extract modulation from cavitation noise
+  - Lowpass filter isolates blade rate (0.5-20 Hz typical range)
+  - Calculates confidence based on signal variance
 
 **FFT.js**: Used for spectral analysis of acoustic signals
 
@@ -89,6 +103,8 @@ npm run deploy
 Centralized types in `src/types/index.ts`:
 - `Target`: Position, velocity, course, speed, depth, acoustic signature
 - `AcousticSignature`: Engine frequencies, harmonics, blade count, shaft RPM, cavitation, vessel type
+- `VesselType`: SURFACE, SUBMARINE, MERCHANT, WARSHIP, UNKNOWN
+- `ClassificationStatus`: UNDETECTED → DETECTED → ANALYZING → IDENTIFIED progression
 - `SonarState`: Main state shape
 - `LOFARData`, `DEMONData`, `BearingReading`: Analysis data structures
 
@@ -97,7 +113,9 @@ Centralized types in `src/types/index.ts`:
 - **Audio initialization**: Must happen after user gesture; check `isAudioInitialized` flag before operations
 - **Singleton audio**: Single `AudioEngine` instance managed in dashboard; do not create new instances
 - **Path alias**: Use `@/` for imports to `src/` directory (configured in `tsconfig.json` and `vite.config.ts`)
-- **Time compression**: Affects physics in game loop but not audio pitch
+- **Time compression**: Affects physics in game loop but not audio pitch (1x, 10x, etc.)
+- **Bearing calculation**: Degrees clockwise from north (0° = +Z, 90° = +X); atan2(dx, dz) converted to degrees
+- **Default targets**: Two targets created at startup at (500, 0, 0) and (-300, 0, 400) with default acoustic signatures
 - **Deployment**: Uses base path `/sonarman-kimi-k2.5/` in Vite config for GitHub Pages; repository is hosted at https://idgmatrix.github.io/sonarman-kimi-k2.5/
 - **Strict mode**: TypeScript enforces strict type checking
 - **Styling**: Custom Tailwind config defines a `sonar` theme with dark ocean colors and accent green (#00ff88)
