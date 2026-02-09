@@ -38,8 +38,11 @@ export const TMAPlotter: React.FC = () => {
     const bucketSize = 5000;
     const buckets = new Map<number, any>();
 
-    for (let t = minTime; t <= maxTime; t += bucketSize) {
-      buckets.set(t, { time: (t - minTime) / 1000 });
+    const startBucket = Math.floor(minTime / bucketSize) * bucketSize;
+    const endBucket = Math.ceil(maxTime / bucketSize) * bucketSize;
+
+    for (let t = startBucket; t <= endBucket; t += bucketSize) {
+      buckets.set(t, { time: (t - startBucket) / 1000 });
     }
 
     // Fill in bearing data

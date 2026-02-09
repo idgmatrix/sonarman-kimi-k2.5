@@ -124,6 +124,9 @@ export const useSonarStore = create<SonarState & SonarActions>((set, _get) => ({
 
   update: (deltaTime) => set((state) => {
     const timeScale = state.timeCompression * deltaTime;
+    let bearingHistoryUpdated = false;
+    // Create a new map to avoid mutation, but only populate it if needed
+    const nextBearingHistory = new Map(state.bearingHistory);
     
     const updatedTargets = state.targets.map(target => {
       // Update position based on velocity
@@ -159,8 +162,9 @@ export const useSonarStore = create<SonarState & SonarActions>((set, _get) => ({
           bearing: bearing + (Math.random() - 0.5) * 5, // Add some noise
           confidence: Math.min(snr / 20, 1)
         };
-        const history = state.bearingHistory.get(target.id) || [];
-        state.bearingHistory.set(target.id, [...history, reading].slice(-200));
+        const history = nextBearingHistory.get(target.id) || [];
+        nextBearingHistory.set(target.id, [...history, reading].slice(-200));
+        bearingHistoryUpdated = true;
       }
 
       return {
@@ -175,6 +179,9 @@ export const useSonarStore = create<SonarState & SonarActions>((set, _get) => ({
       };
     });
 
-    return { targets: updatedTargets };
+    return { 
+      targets: updatedTargets,
+      bearingHistory: bearingHistoryUpdated ? nextBearingHistory : state.bearingHistory
+    };
   })
 }));
