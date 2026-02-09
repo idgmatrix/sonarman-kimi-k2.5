@@ -1,5 +1,6 @@
 import * as Tone from 'tone';
 import { Vector3, Target } from '@/types';
+import { DEMONProcessor } from './processors/DEMONProcessor';
 
 export class AudioEngine {
   private listener: typeof Tone.Listener;
@@ -7,6 +8,9 @@ export class AudioEngine {
   private targetSources: Map<string, Tone.Panner3D>;
   private targetNoises: Map<string, Tone.Noise>;
   private targetFilters: Map<string, Tone.Filter>;
+  private targetModulators: Map<string, Tone.LFO>;
+  private targetModGains: Map<string, Tone.Gain>;
+  private demonProcessors: Map<string, DEMONProcessor>;
   private isInitialized: boolean = false;
 
   constructor() {
@@ -15,6 +19,9 @@ export class AudioEngine {
     this.targetSources = new Map();
     this.targetNoises = new Map();
     this.targetFilters = new Map();
+    this.targetModulators = new Map();
+    this.targetModGains = new Map();
+    this.demonProcessors = new Map();
   }
 
   async initialize(): Promise<void> {
@@ -77,11 +84,33 @@ export class AudioEngine {
     // Create gain for this target
     const targetGain = new Tone.Gain(target.signature.cavitationLevel * 0.5);
 
-    // Connect chain
+    // Create modulation for blade rate
+    const bladeRate = target.signature.shaftRPM / 60 * target.signature.bladeCount;
+    // Ensure minimum frequency to avoid LFO errors
+    const safeBladeRate = Math.max(0.1, bladeRate);
+
+    const modulator = new Tone.LFO({
+      frequency: safeBladeRate,
+      min: 0.3, // 30% amplitude
+      max: 1.0, // 100% amplitude
+      type: "sine"
+    }).start();
+
+    const modGain = new Tone.Gain(1);
+    modulator.connect(modGain.gain);
+
+    // Create DEMON processor
+    const demonProcessor = new DEMONProcessor();
+
+    // Connect chain: Noise -> Filter -> ModGain -> TargetGain -> Panner
     noise.connect(filter);
-    filter.connect(targetGain);
-    targetGain.connect(panner);
+    filter.connect(modGain);
+    modGain.connect(targetGain);
+    targetGain.connect(panner); // Connect to panner
     panner.connect(this.masterGain);
+
+    // Tap off for analysis (processing the modulated signal)
+    demonProcessor.connect(modGain);
 
     // Start noise
     noise.start();
@@ -90,23 +119,38 @@ export class AudioEngine {
     this.targetSources.set(target.id, panner);
     this.targetNoises.set(target.id, noise);
     this.targetFilters.set(target.id, filter);
+    this.targetModulators.set(target.id, modulator);
+    this.targetModGains.set(target.id, modGain);
+    this.demonProcessors.set(target.id, demonProcessor);
   }
 
   removeTarget(targetId: string): void {
     const panner = this.targetSources.get(targetId);
     const noise = this.targetNoises.get(targetId);
     const filter = this.targetFilters.get(targetId);
+    const modulator = this.targetModulators.get(targetId);
+    const modGain = this.targetModGains.get(targetId);
+    const demonProcessor = this.demonProcessors.get(targetId);
 
     if (noise) {
       noise.stop();
       noise.dispose();
     }
+    if (modulator) {
+      modulator.stop();
+      modulator.dispose();
+    }
+    if (modGain) modGain.dispose();
     if (filter) filter.dispose();
     if (panner) panner.dispose();
+    if (demonProcessor) demonProcessor.dispose();
 
     this.targetSources.delete(targetId);
     this.targetNoises.delete(targetId);
     this.targetFilters.delete(targetId);
+    this.targetModulators.delete(targetId);
+    this.targetModGains.delete(targetId);
+    this.demonProcessors.delete(targetId);
   }
 
   updateTarget(target: Target): void {
@@ -116,6 +160,14 @@ export class AudioEngine {
     if (!panner) {
       this.addTarget(target);
       return;
+    }
+
+    // Update modulation frequency based on current RPM
+    const modulator = this.targetModulators.get(target.id);
+    if (modulator) {
+      const bladeRate = target.signature.shaftRPM / 60 * target.signature.bladeCount;
+      const safeBladeRate = Math.max(0.1, bladeRate);
+      modulator.frequency.value = safeBladeRate;
     }
 
     // Update position
@@ -162,6 +214,12 @@ export class AudioEngine {
     // This would return FFT data for LOFAR display
     // For now, return null - we'll implement with Tone.Analyser
     return null;
+  }
+
+  getDEMONData(targetId: string): { envelope: number[]; bladeRate: number; confidence: number } | null {
+    const processor = this.demonProcessors.get(targetId);
+    if (!processor) return null;
+    return processor.process();
   }
 
   dispose(): void {

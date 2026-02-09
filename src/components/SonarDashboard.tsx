@@ -136,7 +136,7 @@ export const SonarDashboard: React.FC = () => {
               <WaterfallDisplay />
             </div>
             <div className={`absolute inset-0 transition-opacity duration-300 ${activeDisplay === 'DEMON' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
-              <DemonScope />
+              <DemonScope audioEngine={audioEngine} />
             </div>
             <div className={`absolute inset-0 transition-opacity duration-300 ${activeDisplay === 'TMA' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
               <TMAPlotter />
